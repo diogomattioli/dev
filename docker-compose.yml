@@ -1,0 +1,41 @@
+version: "3.9"
+services:
+
+  linux-dev:
+    build: .
+
+  postgres:
+    image: postgres:13-alpine
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    ports:
+      - '5432:5432'
+
+  postgres-admin:
+    image: marvambass/phppgadmin
+    restart: always
+    environment:
+      - DB_HOST=postgres
+    ports:
+      - '5480:80'
+    depends_on:
+      - postgres
+
+  redis:
+    image: redis:7.0-alpine
+    restart: always
+    ports:
+      - '6379:6379'
+
+  redis-admin:
+    image: erikdubbelboer/phpredisadmin:v1.17.2
+    restart: always
+    environment:
+      - REDIS_1_HOST=redis
+    ports:
+      - '6380:80'
+    depends_on:
+      - redis
