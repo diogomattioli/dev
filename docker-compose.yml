@@ -60,6 +60,27 @@ services:
     depends_on:
       - redis
 
+  mongo:
+    image: mongo:6.0.1
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    ports:
+      - '27017:27017'
+
+  mongo-admin:
+    image: mongo-express
+    restart: always
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root
+      ME_CONFIG_MONGODB_ADMINPASSWORD: mongo
+      ME_CONFIG_MONGODB_URL: mongodb://root:mongo@mongo:27017/
+    ports:
+      - '27080:8081'
+    depends_on:
+      - mongo
+
   grafana:
     image: grafana/grafana:9.0.9
     restart: always
