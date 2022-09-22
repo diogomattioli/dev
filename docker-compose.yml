@@ -81,6 +81,16 @@ services:
     depends_on:
       - mongo
 
+  rabbitmq:
+    image: rabbitmq:3.9.22-management-alpine
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: rabbitmq
+      RABBITMQ_DEFAULT_PASS: rabbitmq
+    ports:
+      - '5672:5672'
+      - '5680:15672'
+
   grafana:
     image: grafana/grafana:9.0.9
     restart: always
