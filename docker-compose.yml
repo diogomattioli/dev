@@ -59,3 +59,9 @@ services:
       - '6380:80'
     depends_on:
       - redis
+
+  grafana:
+    image: grafana/grafana:9.0.9
+    restart: always
+    ports:
+      - '3000:3000'
