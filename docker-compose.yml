@@ -1,9 +1,6 @@
 version: "3.9"
 services:
 
-  linux-dev:
-    build: .
-
   postgres:
     image: postgres:13-alpine
     restart: always
@@ -23,6 +20,29 @@ services:
       - '5480:80'
     depends_on:
       - postgres
+
+  mysql:
+    image: mysql:8
+    restart: always
+    environment:
+      - MYSQL_DATABASE=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_ROOT_PASSWORD=mysql
+    ports:
+      - '3306:3306'
+
+  mysql-admin:
+    image: phpmyadmin:5.2.0
+    restart: always
+    environment:
+      - PMA_HOSTS=mysql
+      - PMA_USER=root
+      - PMA_PASSWORD=mysql
+    ports:
+      - '3380:80'
+    depends_on:
+      - mysql
 
   redis:
     image: redis:7.0-alpine
