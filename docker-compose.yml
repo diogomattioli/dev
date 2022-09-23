@@ -70,7 +70,7 @@ services:
       - '27017:27017'
 
   mongo-admin:
-    image: mongo-express:0.54
+    image: mongo-express
     restart: always
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
