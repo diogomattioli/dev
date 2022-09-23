@@ -33,7 +33,7 @@ services:
       - '3306:3306'
 
   mysql-admin:
-    image: phpmyadmin:5.2.0
+    image: phpmyadmin:5
     restart: always
     environment:
       - PMA_HOSTS=mysql
@@ -45,13 +45,13 @@ services:
       - mysql
 
   redis:
-    image: redis:7.0-alpine
+    image: redis:7-alpine
     restart: always
     ports:
       - '6379:6379'
 
   redis-admin:
-    image: erikdubbelboer/phpredisadmin:v1.17.2
+    image: erikdubbelboer/phpredisadmin:v1.17.3
     restart: always
     environment:
       - REDIS_1_HOST=redis
@@ -61,7 +61,7 @@ services:
       - redis
 
   mongo:
-    image: mongo:6.0.1
+    image: mongo:6
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -70,7 +70,7 @@ services:
       - '27017:27017'
 
   mongo-admin:
-    image: mongo-express
+    image: mongo-express:0.54
     restart: always
     environment:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
@@ -82,7 +82,7 @@ services:
       - mongo
 
   rabbitmq:
-    image: rabbitmq:3.9.22-management-alpine
+    image: rabbitmq:3-management-alpine
     restart: always
     environment:
       RABBITMQ_DEFAULT_USER: rabbitmq
@@ -92,7 +92,7 @@ services:
       - '5680:15672'
 
   grafana:
-    image: grafana/grafana:9.0.9
+    image: grafana/grafana:9.1.6
     restart: always
     ports:
       - '3000:3000'
